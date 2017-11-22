@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--常用字体-->
+    <color name="text_color_bar">#212121</color>//顶部字体颜色，加粗
+    <color name="main_color_red">#E61717</color>//红主色
+    <color name="main_color_blue">#3385ff</color>//蓝主色
+    <color name="text_color_blue">#4397C7</color>//蓝色,字体蓝
+    <color name="bg_blue">#4298F8</color>//蓝色,按钮
+    <color name="text_color_gray_black">#646464</color>//字体灰黑之间
+    <color name="text_color_gray">#989898</color>//字体灰
+    <color name="text_color_gray02">#808080</color>//字体灰,商品详情页中有用
+
+
+    <!--分割线-->
+    <color name="cline_low">#EBEBEB</color>//常用浅色分割线
+    <color name="cline_deep">#DBDBDB</color>//常用深色分割线
+    <color name="cline_bar">#E2E2E2</color>//标题栏分割线
+
+    <!--背景色-->
+    <color name="activity_bg">#F2F2F2</color>//背景颜色
+    <color name="bg_gray2">#C8C8C8</color>
+    <color name="half_white">#88FFFFFF</color>
+</resources>

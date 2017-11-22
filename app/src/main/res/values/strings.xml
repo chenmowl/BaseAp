@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BaseAp</string>
+
+    <!--网络-->
+    <string name="net_error">网络异常</string>
+    <string name="request_error">无数据</string>
+    <string name="no_data">最后一页</string>
+    <string name="info_error">信息有误</string>
+    <string name="update_error">刷新失败</string>
+
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+</resources>

@@ -1,0 +1,67 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!--AVLoading大小样式-->
+    <style name="AVLoadingIndicatorView.Small">
+        <item name="minWidth">24dip</item>
+        <item name="maxWidth">24dip</item>
+        <item name="minHeight">24dip</item>
+        <item name="maxHeight">24dip</item>
+        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
+    </style>
+
+    <!-- 重写系统弹出Dialog -->
+    <style name="KDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 除去title -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- 此属性可以翻译为 是否允许对话框的背景变暗？如果允许背景就变暗了。-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 除去背景色 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="KDialogWhiteTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 除去title -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 此属性可以翻译为 是否允许对话框的背景变暗？如果允许背景就变暗了。-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 除去背景色 -->
+        <item name="android:windowBackground">@color/half_white</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+    <!--修改头像弹出样式-->
+    <style name="AnimDialogBottomEntry" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_photo_picker_enter</item>
+        <item name="android:windowExitAnimation" >@anim/dialog_photo_picker_exit</item>
+    </style>
+
+    <!--修改头像弹出样式-->
+    <style name="AnimDialogUpEntry" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_foot_mark_enter</item>
+        <item name="android:windowExitAnimation" >@anim/dialog_foot_mark_exit</item>
+    </style>
+
+</resources>

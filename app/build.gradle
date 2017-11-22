@@ -1,0 +1,149 @@
+apply plugin: 'com.android.application'
+
+android {
+    /**
+     * 设置编译 sdk 和编译工具的版本
+     */
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    /**
+     * 为所有的 build variants 设置默认的值. 关于 build variant, 我们后面会用一张图片说明
+     */
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    /**
+     * 关于签名, 请参考 google 官方文档 Sign Your App: https://developer.android.com/studio/publish/app-signing.html#debug-mode
+     */
+    signingConfigs {
+        /**
+         * 由于 Module-level Build Script(本文件) 也要放在 VCS 中管理, 所以不将密码等信息写在这里.
+         * 一般的做法是: 在本机设置环境变量, 然后通过下面代码中演示的这种方式读取.
+         * 当然, 最佳实践也指导我们将 `gradle.properties` 排除在 VCS 之外,
+         * 此时, 也在该文件中将密码设置为变量, 然后在此读取使用.
+         */
+        release {
+            storeFile file(jksPath)
+            storePassword jksPassword
+            keyAlias kAlias
+            keyPassword kPassword
+//            v2SigningEnabled false
+        }
+
+        /**
+         * As 会自动帮我们使用 debug certificate 进行签名. 这个 debug certificate 每次安装 As 都会变,
+         * 因此不适合作为发布之用.
+         */
+        debug{}
+    }
+
+    /**
+     * type 默认会有 debug 和 release. 不管你写不写都如此.
+     * 通常, 我们在 debug 中保留默认值, release 中开启混淆, 并使用私有的签名
+     */
+    buildTypes {
+        release {
+            //优化资源文件，去除不必要资源
+            debuggable true
+            jniDebuggable true
+            shrinkResources true
+            minifyEnabled true
+            zipAlignEnabled true //是否启用zipAlign压缩
+//            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            jniDebuggable true
+            shrinkResources true
+            minifyEnabled true
+            zipAlignEnabled true
+//            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+            aidl.srcDirs = ['src/main/aidl']
+        }
+    }
+
+    dexOptions {
+        //incremental true
+        javaMaxHeapSize "4g"
+    }
+
+    /**
+     * flavor 强调的是不同的版本, 比如付费版和免费版.
+     * 在国内, 这个字段更多被用于区分不同的渠道, 即 360 渠道, 小米渠道等等.
+     */
+//    productFlavors {
+//        m360 {}
+//        xiaomi {
+//            applicationId "com.zjwh.xiaomi.baseap"
+//        }
+//    }
+
+}
+
+/**
+ * 这个项目的依赖
+ */
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+
+
+    implementation rootProject.ext.dependencies.getAt("support-v4")
+    implementation rootProject.ext.dependencies.getAt("appcompat-v7")
+    implementation rootProject.ext.dependencies.getAt("design")
+    implementation rootProject.ext.dependencies.getAt("cardview")
+    implementation rootProject.ext.dependencies.getAt("rxjava")
+    implementation rootProject.ext.dependencies.getAt("rxandroid")
+    implementation rootProject.ext.dependencies.getAt("rxbinding")
+    implementation rootProject.ext.dependencies.getAt("adapter-rxjava")
+    implementation rootProject.ext.dependencies.getAt("dagger")
+    implementation rootProject.ext.dependencies.getAt("okhttp3-logging-interceptor")
+    implementation rootProject.ext.dependencies.getAt("okhttp3")
+    implementation rootProject.ext.dependencies.getAt("butterknife")
+    implementation rootProject.ext.dependencies.getAt("avi")
+    implementation rootProject.ext.dependencies.getAt("glide")
+    implementation rootProject.ext.dependencies.getAt("adapter")
+    implementation rootProject.ext.dependencies.getAt("statusbarutil")
+    implementation rootProject.ext.dependencies.getAt("ViewPagerIndicator")
+    implementation rootProject.ext.dependencies.getAt("SmartRefreshLayout")
+
+    annotationProcessor rootProject.ext.dependencies.getAt("butterknife-compiler")
+    annotationProcessor rootProject.ext.dependencies.getAt("dagger-compiler")
+    annotationProcessor rootProject.ext.dependencies.getAt("glide-compiler")
+
+    //lib library
+    compile files('libs/fastjson-1.2.41.jar')
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+}
+
+/**
+ * 配置了去哪里查找这个模块依赖文件
+ */
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
